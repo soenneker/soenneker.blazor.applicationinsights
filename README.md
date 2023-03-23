@@ -1,5 +1,5 @@
 [![](https://img.shields.io/nuget/v/Soenneker.Blazor.ApplicationInsights.svg?style=for-the-badge)](https://www.nuget.org/packages/Soenneker.Blazor.ApplicationInsights/)
-[![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.blazor.applicationinsights/main.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.blazor.applicationinsights/actions/workflows/main.yml)
+[![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.blazor.applicationinsights/publish.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.blazor.applicationinsights/actions/workflows/publish.yml)
 [![](https://img.shields.io/nuget/dt/Soenneker.Blazor.ApplicationInsights.svg?style=for-the-badge)](https://www.nuget.org/packages/Soenneker.Blazor.ApplicationInsights/)
 
 # Soenneker.Blazor.ApplicationInsights
