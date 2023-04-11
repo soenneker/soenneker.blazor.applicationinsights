@@ -2,7 +2,7 @@
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.blazor.applicationinsights/publish.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.blazor.applicationinsights/actions/workflows/publish.yml)
 [![](https://img.shields.io/nuget/dt/Soenneker.Blazor.ApplicationInsights.svg?style=for-the-badge)](https://www.nuget.org/packages/Soenneker.Blazor.ApplicationInsights/)
 
-# Soenneker.Blazor.ApplicationInsights
+# ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Blazor.ApplicationInsights
 ### A small Blazor interop library that sets up client-side [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net).
 
 ## Installation
