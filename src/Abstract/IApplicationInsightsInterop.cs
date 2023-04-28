@@ -2,6 +2,9 @@
 
 namespace Soenneker.Blazor.ApplicationInsights.Abstract;
 
+/// <summary>
+/// A Blazor interop library that sets up client-side Azure Application Insights
+/// </summary>
 public interface IApplicationInsightsInterop 
 {
     /// <summary>

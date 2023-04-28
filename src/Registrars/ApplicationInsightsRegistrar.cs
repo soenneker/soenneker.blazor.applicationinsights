@@ -1,8 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Soenneker.Blazor.ApplicationInsights.Abstract;
 
-namespace Soenneker.Blazor.ApplicationInsights.Extensions;
+namespace Soenneker.Blazor.ApplicationInsights.Registrars;
 
+/// <summary>
+/// A Blazor interop library that sets up client-side Azure Application Insights
+/// </summary>
 public static class ApplicationInsightsRegistrar
 {
     /// <summary>
@@ -10,6 +14,6 @@ public static class ApplicationInsightsRegistrar
     /// </summary>
     public static void AddApplicationInsights(this IServiceCollection services)
     {
-        services.AddScoped<IApplicationInsightsInterop, ApplicationInsightsInterop>();
+        services.TryAddScoped<IApplicationInsightsInterop, ApplicationInsightsInterop>();
     }
 }
