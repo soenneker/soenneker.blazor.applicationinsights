@@ -8,7 +8,7 @@
 ## Installation
 
 ```
-Install-Package Soenneker.Blazor.ApplicationInsights
+dotnet add package Soenneker.Blazor.ApplicationInsights
 ```
 
 ## Usage
