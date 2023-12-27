@@ -14,7 +14,7 @@
         <AssemblyName>Soenneker.Blazor.ApplicationInsights</AssemblyName>
         <PackageId>Soenneker.Blazor.ApplicationInsights</PackageId>
         <PackageTags>blazor application insights interop c# .net dotnet</PackageTags>
-        <Copyright>Copyright © 2024 Jake Soenneker</Copyright>
+        <Copyright>Copyright © 2023-2024 Jake Soenneker</Copyright>
         <Authors>Jake Soenneker</Authors>
         <Company>soenneker.com</Company>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
