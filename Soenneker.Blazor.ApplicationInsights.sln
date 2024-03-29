@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\automerge.yml = .github\workflows\automerge.yml
 		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
 		.github\workflows\publish-package.yml = .github\workflows\publish-package.yml
-		.github\workflows\reenable-automerge.yml = .github\workflows\reenable-automerge.yml
+
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soenneker.Blazor.ApplicationInsights.Tests", "test\Soenneker.Blazor.ApplicationInsights.Tests.csproj", "{D2DF1B91-8F4C-44B4-B898-29B40212C83C}"
