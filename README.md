@@ -13,13 +13,7 @@ dotnet add package Soenneker.Blazor.ApplicationInsights
 
 ## Usage
 
-1. Insert the script in `wwwroot/index.html` at the bottom of your `<body>` but before the other scripts
-
-```html
-<script src="_content/Soenneker.Blazor.ApplicationInsights/applicationinsights.js"></script>
-```
-
-2. Register the interop within DI (`Program.cs`)
+1. Register the interop within DI (`Program.cs`)
 
 ```csharp
 public static async Task Main(string[] args)
@@ -29,16 +23,14 @@ public static async Task Main(string[] args)
 }
 ```
 
-3. Inject `IApplicationInsightsInterop` within your `App.Razor` file
-
+2. Inject `IApplicationInsightsInterop` within your `App.Razor` file
 
 ```csharp
 @using Soenneker.Blazor.ApplicationInsights.Abstract
 @inject IApplicationInsightsInterop AppInsightsInterop
 ```
 
-
-4. Initialize the interop in `OnInitializedAsync` within `App.Razor` using your Clarity project key
+3. Initialize the interop in `OnInitializedAsync` within `App.Razor` using your Application Insights connection string
 
 ```csharp
 protected override async Task OnInitializedAsync()
