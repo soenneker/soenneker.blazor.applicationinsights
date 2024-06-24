@@ -42,4 +42,9 @@ public class ApplicationInsightsInterop : IApplicationInsightsInterop
 
         await _jsRuntime.InvokeVoidAsync("AppInsightsInterop.init", cancellationToken, connectionString);
     }
+
+    public ValueTask DisposeAsync()
+    {
+        return _moduleImportUtil.DisposeModule("Soenneker.Blazor.ApplicationInsights/js/applicationinsightsinterop.js");
+    }
 }

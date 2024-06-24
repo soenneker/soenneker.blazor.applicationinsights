@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Soenneker.Blazor.ApplicationInsights.Abstract;
@@ -6,7 +7,7 @@ namespace Soenneker.Blazor.ApplicationInsights.Abstract;
 /// <summary>
 /// A Blazor interop library that sets up client-side Azure Application Insights
 /// </summary>
-public interface IApplicationInsightsInterop 
+public interface IApplicationInsightsInterop : IAsyncDisposable
 {
     /// <summary>
     /// Calls the JS interop initialization code, and begins the connection to Application Insights. <para/>
