@@ -30,8 +30,8 @@ public class ApplicationInsightsInterop : IApplicationInsightsInterop
 
         _initialized = true;
 
-        await _moduleImportUtil.Import("Soenneker.Blazor.ApplicationInsights/js/applicationinsights.js", cancellationToken);
-        await _moduleImportUtil.WaitUntilLoaded("Soenneker.Blazor.ApplicationInsights/js/applicationinsights.js", cancellationToken);
+        await _moduleImportUtil.Import("Soenneker.Blazor.ApplicationInsights/js/applicationinsightsinterop.js", cancellationToken);
+        await _moduleImportUtil.WaitUntilLoaded("Soenneker.Blazor.ApplicationInsights/js/applicationinsightsinterop.js", cancellationToken);
     }
 
     public async ValueTask Init(string connectionString, CancellationToken cancellationToken = default)
