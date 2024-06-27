@@ -19,3 +19,5 @@
         });
     };
 }
+
+window.AppInsightsInterop = new AppInsightsInterop()
