@@ -28,7 +28,7 @@ public class ApplicationInsightsInterop : IApplicationInsightsInterop
         {
             var cancellationToken = (CancellationToken) objects[0];
 
-            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js", "AppInsightsInterop", 100, cancellationToken);
+            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js", "AppInsightsInterop", 100, cancellationToken).NoSync();
 
             return new object();
         });
