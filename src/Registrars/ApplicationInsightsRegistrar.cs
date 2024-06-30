@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Soenneker.Blazor.ApplicationInsights.Abstract;
-using Soenneker.Blazor.Utils.ModuleImport.Registrars;
+using Soenneker.Blazor.Utils.ResourceLoader.Registrars;
 
 namespace Soenneker.Blazor.ApplicationInsights.Registrars;
 
@@ -11,11 +11,11 @@ namespace Soenneker.Blazor.ApplicationInsights.Registrars;
 public static class ApplicationInsightsRegistrar
 {
     /// <summary>
-    /// Shorthand for <code>services.AddScoped</code>
+    /// Shorthand for <code>services.TryAddSingleton</code>
     /// </summary>
     public static void AddApplicationInsights(this IServiceCollection services)
     {
-        services.AddModuleImportUtil();
-        services.TryAddScoped<IApplicationInsightsInterop, ApplicationInsightsInterop>();
+        services.AddResourceLoader();
+        services.TryAddSingleton<IApplicationInsightsInterop, ApplicationInsightsInterop>();
     }
 }

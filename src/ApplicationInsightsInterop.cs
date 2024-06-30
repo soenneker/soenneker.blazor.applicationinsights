@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using Soenneker.Blazor.ApplicationInsights.Abstract;
-using Soenneker.Blazor.Utils.ModuleImport.Abstract;
+using Soenneker.Blazor.Utils.ResourceLoader.Abstract;
 using Soenneker.Extensions.ValueTask;
 using Soenneker.Utils.AsyncSingleton;
 
@@ -14,22 +14,21 @@ public class ApplicationInsightsInterop : IApplicationInsightsInterop
 {
     private readonly IJSRuntime _jsRuntime;
     private readonly ILogger<ApplicationInsightsInterop> _logger;
-    private readonly IModuleImportUtil _moduleImportUtil;
+    private readonly IResourceLoader _resourceLoader;
 
     private readonly AsyncSingleton<object> _scriptInitializer;
 
-    public ApplicationInsightsInterop(IJSRuntime jSRuntime, ILogger<ApplicationInsightsInterop> logger, IModuleImportUtil moduleImportUtil)
+    public ApplicationInsightsInterop(IJSRuntime jSRuntime, ILogger<ApplicationInsightsInterop> logger, IResourceLoader resourceLoader)
     {
         _jsRuntime = jSRuntime;
         _logger = logger;
-        _moduleImportUtil = moduleImportUtil;
+        _resourceLoader = resourceLoader;
 
         _scriptInitializer = new AsyncSingleton<object>(async objects =>
         {
             var cancellationToken = (CancellationToken) objects[0];
 
-            await _moduleImportUtil.Import("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js", cancellationToken);
-            await _moduleImportUtil.WaitUntilLoadedAndAvailable("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js", "AppInsightsInterop", 100, cancellationToken);
+            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js", "AppInsightsInterop", 100, cancellationToken);
 
             return new object();
         });
@@ -46,6 +45,6 @@ public class ApplicationInsightsInterop : IApplicationInsightsInterop
 
     public ValueTask DisposeAsync()
     {
-        return _moduleImportUtil.DisposeModule("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js");
+        return _resourceLoader.DisposeModule("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js");
     }
 }
