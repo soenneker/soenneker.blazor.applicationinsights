@@ -24,11 +24,9 @@ public class ApplicationInsightsInterop : IApplicationInsightsInterop
         _logger = logger;
         _resourceLoader = resourceLoader;
 
-        _scriptInitializer = new AsyncSingleton<object>(async objects =>
+        _scriptInitializer = new AsyncSingleton<object>(async (token, _) =>
         {
-            var cancellationToken = (CancellationToken) objects[0];
-
-            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js", "AppInsightsInterop", 100, cancellationToken).NoSync();
+            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js", "AppInsightsInterop", 100, token).NoSync();
 
             return new object();
         });
