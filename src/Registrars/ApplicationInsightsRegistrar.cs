@@ -10,12 +10,9 @@ namespace Soenneker.Blazor.ApplicationInsights.Registrars;
 /// </summary>
 public static class ApplicationInsightsRegistrar
 {
-    /// <summary>
-    /// Shorthand for <code>services.TryAddSingleton</code>
-    /// </summary>
     public static void AddApplicationInsights(this IServiceCollection services)
     {
         services.AddResourceLoader();
-        services.TryAddSingleton<IApplicationInsightsInterop, ApplicationInsightsInterop>();
+        services.TryAddScoped<IApplicationInsightsInterop, ApplicationInsightsInterop>();
     }
 }
