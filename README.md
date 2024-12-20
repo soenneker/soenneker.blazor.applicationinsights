@@ -19,7 +19,7 @@ dotnet add package Soenneker.Blazor.ApplicationInsights
 public static async Task Main(string[] args)
 {
     ...
-    builder.Services.AddApplicationInsights();
+    builder.Services.AddApplicationInsightsInteropAsScoped();
 }
 ```
 
