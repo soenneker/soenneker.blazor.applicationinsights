@@ -10,7 +10,7 @@ namespace Soenneker.Blazor.ApplicationInsights.Registrars;
 /// </summary>
 public static class ApplicationInsightsRegistrar
 {
-    public static void AddApplicationInsights(this IServiceCollection services)
+    public static void AddApplicationInsightsInteropAsScoped(this IServiceCollection services)
     {
         services.AddResourceLoader();
         services.TryAddScoped<IApplicationInsightsInterop, ApplicationInsightsInterop>();
