@@ -12,7 +12,7 @@ public static class ApplicationInsightsRegistrar
 {
     public static IServiceCollection AddApplicationInsightsInteropAsScoped(this IServiceCollection services)
     {
-        services.AddResourceLoader();
+        services.AddResourceLoaderAsScoped();
         services.TryAddScoped<IApplicationInsightsInterop, ApplicationInsightsInterop>();
 
         return services;
