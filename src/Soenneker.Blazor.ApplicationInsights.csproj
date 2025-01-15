@@ -38,6 +38,6 @@
         <None Include="..\icon.png" Pack="true" PackagePath="\" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.1" />
 
-        <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="3.0.912" />
+        <PackageReference Include="Soenneker.Blazor.Utils.ResourceLoader" Version="3.0.913" />
     </ItemGroup>
 </Project>
