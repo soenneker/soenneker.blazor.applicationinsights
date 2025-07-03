@@ -10,7 +10,7 @@ using Soenneker.Utils.AsyncSingleton;
 namespace Soenneker.Blazor.ApplicationInsights;
 
 ///<inheritdoc cref="IApplicationInsightsInterop"/>
-public class ApplicationInsightsInterop : IApplicationInsightsInterop
+public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
 {
     private readonly IJSRuntime _jsRuntime;
     private readonly ILogger<ApplicationInsightsInterop> _logger;
