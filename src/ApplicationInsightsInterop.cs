@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
@@ -26,7 +26,7 @@ public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
 
         _scriptInitializer = new AsyncSingleton<object>(async (token, _) =>
         {
-            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js", "AppInsightsInterop", 100, token).NoSync();
+            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js", "AppInsightsInterop", 100, token);
 
             return new object();
         });
@@ -36,7 +36,7 @@ public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
     {
         _logger.LogDebug("Initializing Application Insights...");
 
-        await _scriptInitializer.Get(cancellationToken).NoSync();
+        await _scriptInitializer.Get(cancellationToken);
 
         await _jsRuntime.InvokeVoidAsync("AppInsightsInterop.init", cancellationToken, connectionString);
     }
