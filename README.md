@@ -30,12 +30,14 @@ public static async Task Main(string[] args)
 @inject IApplicationInsightsInterop AppInsightsInterop
 ```
 
-3. Initialize the interop in `OnInitializedAsync` within `App.Razor` using your Application Insights connection string
+3. Call the interop from `OnAfterRenderAsync` in `App.razor`.
 
 ```csharp
-protected override async Task OnInitializedAsync()
+protected override async Task OnAfterRenderAsync(bool firstRender)
 {
+    if (!firstRender)
+        return;
+
     await AppInsightsInterop.Init("your-connection-string-here");
-    ...
 }
 ```
