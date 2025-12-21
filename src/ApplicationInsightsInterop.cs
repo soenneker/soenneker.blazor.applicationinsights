@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using Soenneker.Blazor.ApplicationInsights.Abstract;
 using Soenneker.Blazor.Utils.ResourceLoader.Abstract;
-using Soenneker.Utils.AsyncInitializers;
+using Soenneker.Asyncs.Initializers;
 
 namespace Soenneker.Blazor.ApplicationInsights;
 
