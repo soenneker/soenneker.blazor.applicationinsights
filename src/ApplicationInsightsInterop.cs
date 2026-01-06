@@ -17,16 +17,19 @@ public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
 
     private readonly AsyncInitializer _scriptInitializer;
 
+    private const string _module = "Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js";
+
     public ApplicationInsightsInterop(IJSRuntime jSRuntime, ILogger<ApplicationInsightsInterop> logger, IResourceLoader resourceLoader)
     {
         _jsRuntime = jSRuntime;
         _logger = logger;
         _resourceLoader = resourceLoader;
+        _scriptInitializer = new AsyncInitializer(InitializeScript);
+    }
 
-        _scriptInitializer = new AsyncInitializer(async token =>
-        {
-            await _resourceLoader.ImportModuleAndWaitUntilAvailable("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js", "AppInsightsInterop", 100, token);
-        });
+    private ValueTask InitializeScript(CancellationToken token)
+    {
+        return _resourceLoader.ImportModuleAndWaitUntilAvailable(_module, "AppInsightsInterop", 100, token);
     }
 
     public async ValueTask Init(string connectionString, CancellationToken cancellationToken = default)
@@ -40,7 +43,7 @@ public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
 
     public async ValueTask DisposeAsync()
     {
-        await _resourceLoader.DisposeModule("Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js");
+        await _resourceLoader.DisposeModule(_module);
         await _scriptInitializer.DisposeAsync();
     }
 }
