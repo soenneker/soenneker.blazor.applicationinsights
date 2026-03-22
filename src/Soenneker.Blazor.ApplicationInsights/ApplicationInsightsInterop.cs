@@ -35,13 +35,9 @@ public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
         _scriptInitializer = new AsyncInitializer(InitializeScript);
     }
 
-    private ValueTask InitializeScript(CancellationToken token)
+    private async ValueTask InitializeScript(CancellationToken token)
     {
-        return _resourceLoader.ImportModuleAndWaitUntilAvailable(
-            _module,
-            "AppInsightsInterop",
-            100,
-            token);
+        _ = await _resourceLoader.ImportModule(_module, token);
     }
 
     public async ValueTask Init(string connectionString, CancellationToken cancellationToken = default)
