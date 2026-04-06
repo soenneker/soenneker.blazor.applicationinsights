@@ -2,9 +2,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
-using Soenneker.Asyncs.Initializers;
 using Soenneker.Blazor.ApplicationInsights.Abstract;
-using Soenneker.Blazor.Utils.ResourceLoader.Abstract;
+using Soenneker.Blazor.Utils.ModuleImport.Abstract;
 using Soenneker.Extensions.CancellationTokens;
 using Soenneker.Utils.CancellationScopes;
 
@@ -13,31 +12,17 @@ namespace Soenneker.Blazor.ApplicationInsights;
 ///<inheritdoc cref="IApplicationInsightsInterop"/>
 public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
 {
-    private readonly IJSRuntime _jsRuntime;
     private readonly ILogger<ApplicationInsightsInterop> _logger;
-    private readonly IResourceLoader _resourceLoader;
+    private readonly IModuleImportUtil _moduleImportUtil;
 
-    private readonly AsyncInitializer _scriptInitializer;
-
-    private const string _module = "Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js";
+    private const string _module = "/_content/Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js";
 
     private readonly CancellationScope _cancellationScope = new();
 
-    public ApplicationInsightsInterop(
-        IJSRuntime jSRuntime,
-        ILogger<ApplicationInsightsInterop> logger,
-        IResourceLoader resourceLoader)
+    public ApplicationInsightsInterop(ILogger<ApplicationInsightsInterop> logger, IModuleImportUtil moduleImportUtil)
     {
-        _jsRuntime = jSRuntime;
         _logger = logger;
-        _resourceLoader = resourceLoader;
-
-        _scriptInitializer = new AsyncInitializer(InitializeScript);
-    }
-
-    private async ValueTask InitializeScript(CancellationToken token)
-    {
-        _ = await _resourceLoader.ImportModule(_module, token);
+        _moduleImportUtil = moduleImportUtil;
     }
 
     public async ValueTask Init(string connectionString, CancellationToken cancellationToken = default)
@@ -48,15 +33,14 @@ public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
 
         using (source)
         {
-            await _scriptInitializer.Init(linked);
-            await _jsRuntime.InvokeVoidAsync("AppInsightsInterop.init", linked, connectionString);
+            var module = await _moduleImportUtil.GetContentModuleReference(_module, linked);
+            await module.InvokeVoidAsync("init", linked, connectionString);
         }
     }
 
     public async ValueTask DisposeAsync()
     {
-        await _resourceLoader.DisposeModule(_module);
-        await _scriptInitializer.DisposeAsync();
+        await _moduleImportUtil.DisposeContentModule(_module);
         await _cancellationScope.DisposeAsync();
     }
 }
