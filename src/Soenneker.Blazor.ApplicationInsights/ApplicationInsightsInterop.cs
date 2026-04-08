@@ -15,7 +15,7 @@ public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
     private readonly ILogger<ApplicationInsightsInterop> _logger;
     private readonly IModuleImportUtil _moduleImportUtil;
 
-    private const string _module = "/_content/Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js";
+    private const string _module = "_content/Soenneker.Blazor.ApplicationInsights/applicationinsightsinterop.js";
 
     private readonly CancellationScope _cancellationScope = new();
 
