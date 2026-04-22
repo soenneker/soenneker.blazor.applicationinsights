@@ -1,21 +1,19 @@
 using Soenneker.Blazor.ApplicationInsights.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
-
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Blazor.ApplicationInsights.Tests;
 
-[Collection("Collection")]
-public class ApplicationInsightsInteropTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public class ApplicationInsightsInteropTests : HostedUnitTest
 {
     private readonly IApplicationInsightsInterop _util;
 
-    public ApplicationInsightsInteropTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public ApplicationInsightsInteropTests(Host host) : base(host)
     {
         _util = Resolve<IApplicationInsightsInterop>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
