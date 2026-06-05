@@ -10,6 +10,11 @@ namespace Soenneker.Blazor.ApplicationInsights.Registrars;
 /// </summary>
 public static class ApplicationInsightsRegistrar
 {
+    /// <summary>
+    /// Adds application insights interop as scoped.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <returns>The result of the operation.</returns>
     public static IServiceCollection AddApplicationInsightsInteropAsScoped(this IServiceCollection services)
     {
         services.AddModuleImportUtilAsScoped();
