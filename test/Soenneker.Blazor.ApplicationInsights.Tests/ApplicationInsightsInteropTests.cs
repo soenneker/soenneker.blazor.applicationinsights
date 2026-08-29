@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+using AwesomeAssertions;
 using Soenneker.Blazor.ApplicationInsights.Abstract;
 using Soenneker.Tests.HostedUnit;
 
@@ -14,8 +17,10 @@ public class ApplicationInsightsInteropTests : HostedUnitTest
     }
 
     [Test]
-    public void Default()
+    public async Task Init_rejects_a_blank_connection_string()
     {
+        Func<Task> act = async () => await _util.Init("   ");
 
+        await act.Should().ThrowAsync<ArgumentException>();
     }
 }

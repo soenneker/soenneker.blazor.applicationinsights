@@ -3,42 +3,47 @@
 [![](https://img.shields.io/nuget/dt/Soenneker.Blazor.ApplicationInsights.svg?style=for-the-badge)](https://www.nuget.org/packages/Soenneker.Blazor.ApplicationInsights/)
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.blazor.applicationinsights/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.blazor.applicationinsights/actions/workflows/codeql.yml)
 
-# ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Blazor.ApplicationInsights
-### A Blazor interop library that sets up client-side Azure [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net).
+# Soenneker.Blazor.ApplicationInsights
+
+Blazor JavaScript interop for loading Azure Application Insights in the browser and starting client-side telemetry.
 
 ## Installation
 
-```
+```bash
 dotnet add package Soenneker.Blazor.ApplicationInsights
 ```
 
-## Usage
-
-1. Register the interop within DI (`Program.cs`)
+## Registration
 
 ```csharp
-public static async Task Main(string[] args)
-{
-    ...
-    builder.Services.AddApplicationInsightsInteropAsScoped();
-}
+using Soenneker.Blazor.ApplicationInsights.Registrars;
+
+builder.Services.AddApplicationInsightsInteropAsScoped();
 ```
 
-2. Inject `IApplicationInsightsInterop` within your `App.Razor` file
+## Initialize after the first render
 
-```csharp
+JavaScript interop is required, so initialize from `OnAfterRenderAsync` rather than during component initialization:
+
+```razor
 @using Soenneker.Blazor.ApplicationInsights.Abstract
-@inject IApplicationInsightsInterop AppInsightsInterop
-```
+@inject IApplicationInsightsInterop ApplicationInsights
+@inject IConfiguration Configuration
 
-3. Call the interop from `OnAfterRenderAsync` in `App.razor`.
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+            return;
 
-```csharp
-protected override async Task OnAfterRenderAsync(bool firstRender)
-{
-    if (!firstRender)
-        return;
-
-    await AppInsightsInterop.Init("your-connection-string-here");
+        await ApplicationInsights.Init(
+            Configuration["ApplicationInsights:ConnectionString"]!);
+    }
 }
 ```
+
+Call `Init` once per application session. The interop begins tracking page load, browser exceptions, and `fetch` dependencies.
+
+The browser downloads the Application Insights SDK from `https://js.monitor.azure.com`. If the application uses a Content Security Policy, allow that script origin and the ingestion endpoint named by the connection string. Telemetry is sent from the user's browser, so review captured URLs, headers, and exception data before enabling it in production.
+
+The scoped service owns its imported JavaScript module and releases it when the scope is disposed.

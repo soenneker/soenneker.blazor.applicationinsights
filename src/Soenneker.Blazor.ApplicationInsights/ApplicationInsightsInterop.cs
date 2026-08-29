@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -9,7 +10,6 @@ using Soenneker.Utils.CancellationScopes;
 
 namespace Soenneker.Blazor.ApplicationInsights;
 
-/// <inheritdoc cref="IApplicationInsightsInterop"/>
 public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
 {
     private readonly ILogger<ApplicationInsightsInterop> _logger;
@@ -27,6 +27,8 @@ public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
 
     public async ValueTask Init(string connectionString, CancellationToken cancellationToken = default)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(connectionString);
+
         _logger.LogDebug("Initializing Application Insights...");
 
         var linked = _cancellationScope.CancellationToken.Link(cancellationToken, out var source);
@@ -38,10 +40,6 @@ public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
         }
     }
 
-    /// <summary>
-    /// Asynchronously releases resources used by the current instance.
-    /// </summary>
-    /// <returns>A task that represents the asynchronous operation.</returns>
     public async ValueTask DisposeAsync()
     {
         await _moduleImportUtil.DisposeContentModule(_module);
