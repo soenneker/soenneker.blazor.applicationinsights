@@ -1,3 +1,4 @@
+using System.Threading;
 using System;
 using System.Threading.Tasks;
 using AwesomeAssertions;
@@ -17,9 +18,9 @@ public class ApplicationInsightsInteropTests : HostedUnitTest
     }
 
     [Test]
-    public async Task Init_rejects_a_blank_connection_string()
+    public async Task Init_rejects_a_blank_connection_string(CancellationToken cancellationToken)
     {
-        Func<Task> act = async () => await _util.Init("   ");
+        Func<Task> act = async () => await _util.Init("   ", cancellationToken: cancellationToken);
 
         await act.Should().ThrowAsync<ArgumentException>();
     }
