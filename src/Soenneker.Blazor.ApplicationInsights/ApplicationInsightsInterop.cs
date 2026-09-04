@@ -10,6 +10,7 @@ using Soenneker.Utils.CancellationScopes;
 
 namespace Soenneker.Blazor.ApplicationInsights;
 
+/// <inheritdoc cref="IApplicationInsightsInterop" />
 public sealed class ApplicationInsightsInterop : IApplicationInsightsInterop
 {
     private readonly ILogger<ApplicationInsightsInterop> _logger;
