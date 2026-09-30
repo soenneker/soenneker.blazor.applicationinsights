@@ -18,7 +18,7 @@ public class ApplicationInsightsInteropTests : HostedUnitTest
     }
 
     [Test]
-    public async Task Init_rejects_a_blank_connection_string(CancellationToken cancellationToken)
+    public async ValueTask Init_rejects_a_blank_connection_string(CancellationToken cancellationToken)
     {
         Func<Task> act = async () => await _util.Init("   ", cancellationToken: cancellationToken);
 
