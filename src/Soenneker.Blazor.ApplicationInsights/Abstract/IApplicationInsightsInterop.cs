@@ -10,7 +10,10 @@ namespace Soenneker.Blazor.ApplicationInsights.Abstract;
 public interface IApplicationInsightsInterop : IAsyncDisposable
 {
     /// <summary>
-    /// Loads the Application Insights browser SDK and starts client-side telemetry. Call this once after the application has rendered and JavaScript interop is available.
+    /// Loads the Application Insights browser SDK, captures JavaScript errors and unhandled promise rejections,
+    /// and connects Error/Critical ILogger entries to exception telemetry in Blazor WebAssembly.
+    /// Call once when JavaScript interop is available. Logs before initialization are not captured.
+    /// Blazor Server logs are not forwarded by the browser logger provider.
     /// </summary>
     /// <param name="connectionString">The Application Insights connection string.</param>
     /// <param name="cancellationToken">Token used to cancel the operation.</param>

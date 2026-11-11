@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
 using Soenneker.TestHosts.Unit;
 using Soenneker.Utils.Test;
 using Soenneker.Blazor.ApplicationInsights.Registrars;
@@ -21,10 +20,7 @@ public class Host : UnitTestHost
 
     private static void SetupIoC(IServiceCollection services)
     {
-        services.AddLogging(builder =>
-        {
-            builder.AddSerilog(dispose: false);
-        });
+        services.AddLogging();
 
         var config = TestUtil.BuildConfig();
         services.AddSingleton(config);
